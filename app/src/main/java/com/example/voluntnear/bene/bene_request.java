@@ -37,6 +37,34 @@ public class bene_request extends AppCompatActivity {
             }
         });
 
+        clinicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(bene_request.this, bene_create.class));
+            }
+        });
+
+        othersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(bene_request.this, bene_create.class));
+            }
+        });
+
+        accomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(bene_request.this, bene_create.class));
+            }
+        });
+
+        groButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(bene_request.this, bene_create.class));
+            }
+        });
+
 
     }
 }
