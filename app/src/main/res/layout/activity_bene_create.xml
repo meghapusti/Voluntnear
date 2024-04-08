@@ -45,6 +45,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+
+    <fragment
+        android:id="@+id/autocomplete_fragment_init"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:layout_width="240dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="320dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <fragment
+        android:id="@+id/autocomplete_fragment_desti"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:layout_width="240dp"
+        android:layout_height="49dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="240dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
     <EditText
         android:id="@+id/breqRemark"
         android:layout_width="283dp"
@@ -56,30 +80,6 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/breqInit"
-        android:layout_width="239dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginBottom="320dp"
-        android:background="@null"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/breqDesti"
-        android:layout_width="233dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginBottom="240dp"
-        android:background="@null"
-        android:ems="10"
-        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -109,5 +109,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

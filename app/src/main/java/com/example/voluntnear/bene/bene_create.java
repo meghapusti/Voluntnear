@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -11,17 +12,30 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.voluntnear.R;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class bene_create extends AppCompatActivity {
     private ImageButton backbreqcreateButton;
@@ -29,8 +43,6 @@ public class bene_create extends AppCompatActivity {
     private TextView breqType;
     private EditText breqDate;
     private EditText breqTime;
-    private EditText breqInit;
-    private EditText breqDesti;
     private EditText breqRemark;
 
     //For Date
@@ -43,6 +55,14 @@ public class bene_create extends AppCompatActivity {
     int currentHr;
     String amPm;
 
+    //Inital Location
+    String initName;
+    LatLng initLoc;
+
+    //Destination
+    String destName;
+    LatLng destLoc;
+
 
 
     @Override
@@ -54,8 +74,6 @@ public class bene_create extends AppCompatActivity {
         breqType = findViewById(R.id.breqType);
         breqDate = findViewById(R.id.breqDate);
         breqTime = findViewById(R.id.breqTime);
-        breqInit = findViewById(R.id.breqInit);
-        breqDesti = findViewById(R.id.breqDesti);
         breqRemark = findViewById(R.id.breqRemark);
         backbreqcreateButton = findViewById(R.id.backbreqcreateButton);
 
@@ -111,7 +129,52 @@ public class bene_create extends AppCompatActivity {
             }
         });
 
+        //Initialise SDK
+        Places.initialize(getApplicationContext(),"AIzaSyCNxGrLqZqeskhn646Mjf5jCOfp3b2FVRw");
 
+        //Create new places client Instance
+        PlacesClient placesClient = Places.createClient(this);
+
+        // Initialize the AutocompleteSupportFragment for INITIAL LOCATION
+        AutocompleteSupportFragment autocompleteFragment_init = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment_init);
+
+        autocompleteFragment_init.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment_init.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                // TODO: Get info about the selected place.
+               initName = place.getName();
+               initLoc = place.getLatLng();
+            }
+            @Override
+            public void onError(@NonNull Status status) {
+                // TODO: Handle the error.
+                Toast.makeText(bene_create.this, "Choose a Location!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Initialize the AutocompleteSupportFragment for DESTINATION
+        AutocompleteSupportFragment autocompleteFragment_desti = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment_desti);
+
+        autocompleteFragment_desti.setPlaceFields(Arrays.asList(Place.Field.NAME, Place.Field.LAT_LNG));
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment_desti.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                destName = place.getName();
+                destLoc = place.getLatLng();
+            }
+            @Override
+            public void onError(@NonNull Status status) {
+                // TODO: Handle the error.
+                Toast.makeText(bene_create.this, "Choose a Location!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -123,10 +186,7 @@ public class bene_create extends AppCompatActivity {
             public void onClick(View view) {
                 String date = breqDate.getText().toString();
                 String time = breqTime.getText().toString();
-                String init_loc = breqInit.getText().toString();
-                String dest_loc = breqDesti.getText().toString();
-                String remarks = breqDesti.getText().toString();
-                //String requestby = //Take Name of Requester
+                String remarks = breqRemark.getText().toString();
 
             }
         });
