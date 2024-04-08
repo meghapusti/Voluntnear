@@ -18,6 +18,9 @@ public class bene_request extends AppCompatActivity {
     private ImageButton groButton;
     private ImageButton backbreqButton;
 
+    //Store request type
+    public static String reqType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class bene_request extends AppCompatActivity {
         clinicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reqType = "Clinic Visit";
                 startActivity(new Intent(bene_request.this, bene_create.class));
             }
         });
@@ -47,6 +51,7 @@ public class bene_request extends AppCompatActivity {
         othersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reqType = "Other Requests";
                 startActivity(new Intent(bene_request.this, bene_create.class));
             }
         });
@@ -54,6 +59,7 @@ public class bene_request extends AppCompatActivity {
         accomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reqType = "Accompany";
                 startActivity(new Intent(bene_request.this, bene_create.class));
             }
         });
@@ -61,6 +67,7 @@ public class bene_request extends AppCompatActivity {
         groButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                reqType = "Grocery Run";
                 startActivity(new Intent(bene_request.this, bene_create.class));
             }
         });
