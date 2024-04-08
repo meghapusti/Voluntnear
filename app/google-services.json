@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "229844075718",
+    "firebase_url": "https://voluntnear-84d1c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "voluntnear-84d1c",
+    "storage_bucket": "voluntnear-84d1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229844075718:android:856728824614b61511c3c7",
+        "android_client_info": {
+          "package_name": "com.example.voluntnear"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWsbUYLCmjR1JRUzmjiATm4_uAUKPIyt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
