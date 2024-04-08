@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.voluntnear.volunt.volunt_home;
 
 public class volunt_taskdetails extends AppCompatActivity {
-    Button acceptTaskButton;
-    ImageButton backvtasksButton;
+    private Button acceptTaskButton;
+    private ImageButton backvtasksButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

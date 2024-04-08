@@ -11,10 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class edit_profile extends AppCompatActivity {
-    Button saveButton;
-    EditText oldPwd;
-    EditText newPwd;
-    EditText newHPNo;
+    private Button saveButton;
+    private EditText oldPwd;
+    private EditText newPwd;
+    private EditText newHPNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

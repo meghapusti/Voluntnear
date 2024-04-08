@@ -3,7 +3,6 @@ package com.example.voluntnear.classes;
 public class User {
     private String email, name, password, phno, role;
 
-
     public User(String email, String name, String password, String phno, String role) {
         this.email = email;
         this.name = name;
@@ -11,6 +10,7 @@ public class User {
         this.phno = phno;
         this.role = role;
     }
+
     public String getName() {
         return name;
     }

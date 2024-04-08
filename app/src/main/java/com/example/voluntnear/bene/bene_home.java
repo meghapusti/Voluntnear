@@ -13,9 +13,9 @@ import com.example.voluntnear.edit_profile;
 
 public class bene_home extends AppCompatActivity {
 
-    ImageButton beditProfileButton;
-    ImageButton brequestButton;
-    ImageButton bcreateButton;
+    private ImageButton beditProfileButton;
+    private ImageButton brequestButton;
+    private ImageButton bcreateButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

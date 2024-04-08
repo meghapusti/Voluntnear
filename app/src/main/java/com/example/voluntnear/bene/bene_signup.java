@@ -26,12 +26,12 @@ import java.util.Objects;
 
 public class bene_signup extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
-    EditText bemailField;
-    EditText bnameField;
-    EditText bhpField;
-    EditText bpwdField;
-    Button bSignUpButton;
+    private FirebaseAuth mAuth;
+    private EditText bemailField;
+    private EditText bnameField;
+    private EditText bhpField;
+    private EditText bpwdField;
+    private Button bSignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +81,13 @@ public class bene_signup extends AppCompatActivity {
 
                             // Create a Map to represent the user data
                             Map<String, Object> userData = new HashMap<>();
-                            userData.put("email", email);
-                            userData.put("name", name);
-                            userData.put("phone", phoneno);
-                            userData.put("password",password);
-                            userData.put("role","bene");
 
-                            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+                            //Create User Obj
+                            User user1 = new User(email,name,password, phoneno, "bene");
+                            userData.put(user1.getName(), user1);
+
+
+                            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Bene");
 
                             // Set the user data under a unique key using the current user's ID
                             usersRef.child(userId).setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -95,12 +95,11 @@ public class bene_signup extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         // Data saved successfully
-                                        Toast.makeText(bene_signup.this, "User data saved successfully!", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(bene_signup.this, bene_login.class));
-                                        finish();
+                                        Toast.makeText(bene_signup.this, "Signed Up Successfully!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(bene_signup.this, bene_login.class));finish();
                                     } else {
                                         // Error occurred while saving data
-                                        Toast.makeText(bene_signup.this, "Failed to save user data", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(bene_signup.this, "Sign Up Failed :(", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

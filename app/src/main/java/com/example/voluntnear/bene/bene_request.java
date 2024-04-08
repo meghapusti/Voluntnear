@@ -12,11 +12,11 @@ import com.example.voluntnear.R;
 
 public class bene_request extends AppCompatActivity {
 
-    ImageButton clinicButton;
-    ImageButton othersButton;
-    ImageButton accomButton;
-    ImageButton groButton;
-    ImageButton backbreqButton;
+    private ImageButton clinicButton;
+    private ImageButton othersButton;
+    private ImageButton accomButton;
+    private ImageButton groButton;
+    private ImageButton backbreqButton;
 
 
     @Override

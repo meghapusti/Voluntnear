@@ -12,7 +12,7 @@ import com.example.voluntnear.R;
 
 public class volunt_tasks extends AppCompatActivity {
 
-    ImageButton backvtaskButton;
+    private ImageButton backvtaskButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

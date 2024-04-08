@@ -13,8 +13,8 @@ import com.example.voluntnear.edit_profile;
 
 public class volunt_home extends AppCompatActivity {
 
-    ImageButton vtaskButton;
-    ImageButton veditprofileButton;
+    private ImageButton vtaskButton;
+    private ImageButton veditprofileButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

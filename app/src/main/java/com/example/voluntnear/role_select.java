@@ -22,9 +22,9 @@ import java.util.List;
 
 public class role_select extends AppCompatActivity {
     //declaring components on page
-    Button continbutton;
-    ChipGroup chipGroup;
-    ImageButton backRoleButton;
+    private Button continbutton;
+    private ChipGroup chipGroup;
+    private ImageButton backRoleButton;
     private String selectedRole = ""; //only exist within this activity --> redirect to which page
     private String role;
 

@@ -21,12 +21,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class bene_login extends AppCompatActivity {
     //firebase connector
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     //Declare variables
-    EditText bLoginMail;
-    EditText bLoginPwd;
-    Button bLoginButton;
+    private EditText bLoginMail;
+    private EditText bLoginPwd;
+    private Button bLoginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

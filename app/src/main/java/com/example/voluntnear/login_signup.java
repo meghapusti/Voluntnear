@@ -17,9 +17,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class login_signup extends AppCompatActivity {
     public static String track_click =""; //track if user pressed login or signup need access on other activity
-    Button loginbutton;
-    Button signupbutton;
-    FirebaseAuth mAuth;
+    private Button loginbutton;
+    private Button signupbutton;
+    private FirebaseAuth mAuth;
 
 
 

@@ -21,10 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class volunt_login extends AppCompatActivity {
-    FirebaseAuth mAuth;
-    EditText vLoginMail;
-    EditText vLoginPwd;
-    Button vLoginButton;
+    private FirebaseAuth mAuth;
+    private EditText vLoginMail;
+    private EditText vLoginPwd;
+    private Button vLoginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

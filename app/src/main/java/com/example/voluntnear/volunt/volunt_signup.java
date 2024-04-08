@@ -23,16 +23,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class volunt_signup extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
-    EditText vemailField;
-    EditText vnameField;
-    EditText vhpField;
-    EditText vpwdField;
-
-    Button vSignUpButton;
+    private FirebaseAuth mAuth;
+    private EditText vemailField;
+    private  EditText vnameField;
+    private EditText vhpField;
+    private EditText vpwdField;
+    private Button vSignUpButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,22 +76,49 @@ public class volunt_signup extends AppCompatActivity {
                     vpwdField.setError("Password must be at least 6 characters long ");
                     return;
                 }
-                //User user1 = new User(email,name, password, phoneno, "bene");
 
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(volunt_signup.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(volunt_signup.this, volunt_login.class));finish();
-                        }
-                        else{
+                        if (task.isSuccessful()) {
+                            // Get the current user's ID
+                            String userId = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+
+                            // Create a Map to represent the user data
+                            Map<String, Object> userData = new HashMap<>();
+
+                            //Create User Obj
+                            User user1 = new User(email,name,password, phoneno, "volunt");
+                            userData.put(user1.getName(), user1);
+
+
+                            DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Volunt");
+
+                            // Set the user data under a unique key using the current user's ID
+                            usersRef.child(userId).setValue(userData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        // Data saved successfully
+                                        Toast.makeText(volunt_signup.this, "Signed Up Successfully!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(volunt_signup.this, volunt_login.class));finish();
+                                    } else {
+                                        // Error occurred while saving data
+                                        Toast.makeText(volunt_signup.this, "Sign Up Failed :(", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        } else {
+                            // Error occurred while creating user
                             Toast.makeText(volunt_signup.this, "Sign Up Failed :(", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
             }
         });
+
+
 
 
     }

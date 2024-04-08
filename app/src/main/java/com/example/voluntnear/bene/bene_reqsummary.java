@@ -12,7 +12,7 @@ import com.example.voluntnear.R;
 
 public class bene_reqsummary extends AppCompatActivity {
 
-    ImageButton backbreqsummButton;
+    private ImageButton backbreqsummButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
