@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.voluntnear.bene.bene_create;
+import com.example.voluntnear.volunt.volunt_home;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     new Handler().postDelayed(new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(MainActivity.this, bene_create.class); //bene_create.class
+            Intent intent = new Intent(MainActivity.this, volunt_home.class); //bene_create.class
             startActivity(intent);finish();
         }
 

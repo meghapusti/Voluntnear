@@ -51,4 +51,6 @@ dependencies {
 
     implementation("com.google.firebase:firebase-database:20.1.0")
     implementation("com.google.firebase:firebase-storage:20.1.0")
+
+    implementation("com.google.android.gms:play-services-maps:18.0.0")
 }
