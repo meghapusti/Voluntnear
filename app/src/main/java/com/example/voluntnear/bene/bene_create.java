@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +23,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.voluntnear.R;
+import com.example.voluntnear.classes.Request;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -31,13 +35,20 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class bene_create extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
     private ImageButton backbreqcreateButton;
     private Button breqCreateButton;
     private TextView breqType;
@@ -76,6 +87,8 @@ public class bene_create extends AppCompatActivity {
         breqTime = findViewById(R.id.breqTime);
         breqRemark = findViewById(R.id.breqRemark);
         backbreqcreateButton = findViewById(R.id.backbreqcreateButton);
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 
         //setting text to request type
         breqType.setText(bene_request.reqType);
@@ -129,6 +142,7 @@ public class bene_create extends AppCompatActivity {
             }
         });
 
+
         //Initialise SDK
         Places.initialize(getApplicationContext(),"AIzaSyCNxGrLqZqeskhn646Mjf5jCOfp3b2FVRw");
 
@@ -176,17 +190,54 @@ public class bene_create extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
         breqCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String date = breqDate.getText().toString();
                 String time = breqTime.getText().toString();
                 String remarks = breqRemark.getText().toString();
+                if (TextUtils.isEmpty(date)){
+                    breqDate.setError("Date is required");
+                    return;
+                }
+                if (TextUtils.isEmpty(time)){
+                    breqTime.setError("Time is required");
+                    return;
+                }
+
+                // Create a new unique key for the request
+                String reqID = mDatabase.getReference("Requests").push().getKey();
+
+                // Get current user ID
+                String userId = mAuth.getCurrentUser().getUid();
+
+                //Get reqType
+                String reqType = bene_request.reqType;
+
+                // Create a Map to represent the user data
+                Map<String, Object> reqData = new HashMap<>();
+
+                // Create a Request object with the request details
+                Request request = new Request(reqID, userId, reqType, date, time, initLoc, destLoc, remarks);
+                reqData.put(request.getRequestId(), request);
+
+                DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+
+                // Set the req data under a unique key using the current reqID
+                reqRef.child(reqID).setValue(reqData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // Data saved successfully
+                            Toast.makeText(bene_create.this, "Request Created!", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(bene_create.this, bene_reqsummary.class));finish();
+                        } else {
+                            // Error occurred while saving data
+                            Toast.makeText(bene_create.this, "Fail to create request :(", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
 
             }
         });

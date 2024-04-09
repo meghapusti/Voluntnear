@@ -25,16 +25,13 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);//initializing the firebase
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        Map<String, Object> userData = new HashMap<>();
-        mDatabase.child("Users").setValue(userData);
 
 
         //Creating a delay to create splash screen
     new Handler().postDelayed(new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(MainActivity.this, volunt_home.class); //bene_create.class
+            Intent intent = new Intent(MainActivity.this, login_signup.class); //bene_create.class
             startActivity(intent);finish();
         }
 

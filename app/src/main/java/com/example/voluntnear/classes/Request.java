@@ -13,20 +13,24 @@ public class Request {
     private LatLng initLoc;
     private LatLng destLoc;
 
+    private String remarks;
+
 
     // Default constructor (required by Firebase)
     public Request() {
         // Default constructor required for calls to DataSnapshot.getValue(Request.class)
     }
 
-    public Request(String requestId, String userId, String requestType,String date,String time,LatLng initLoc,LatLng destLoc) {
-        this.requestId = requestId;
+
+    public Request(String reqID, String userId, String reqType, String date, String time, LatLng initLoc, LatLng destLoc, String remarks) {
+        this.requestId = reqID;
         this.userId = userId;
-        this.requestType = requestType;
+        this.requestType = reqType;
         this.date=date;
         this.time=time;
         this.initLoc=initLoc;
         this.destLoc=destLoc;
+        this.remarks = remarks;
     }
 
     public String getRequestId() {

@@ -71,7 +71,6 @@ public class bene_signup extends AppCompatActivity {
                     bpwdField.setError("Password must be at least 6 characters long ");
                     return;
                 }
-                //User user1 = new User(email,name, password, phoneno, "bene");
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

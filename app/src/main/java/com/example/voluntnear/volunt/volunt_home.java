@@ -40,7 +40,7 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_volunt_home);
 
-// Initialize Firebase Database reference
+        // Initialize Firebase Database reference
         mDatabase = FirebaseDatabase.getInstance().getReference("beneficiaries");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
         mapFragment.getMapAsync(this);
