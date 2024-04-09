@@ -2,6 +2,7 @@ package com.example.voluntnear.volunt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.voluntnear.R;
+import com.example.voluntnear.classes.Request;
 import com.example.voluntnear.edit_profile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +28,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class volunt_home extends AppCompatActivity implements OnMapReadyCallback{
 
@@ -68,20 +73,30 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
         LatLng location=new LatLng(1.3521 , 103.8198);
-        googleMap.addMarker(new MarkerOptions().position(location).title("Singapore"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,12));
+        mMap.addMarker(new MarkerOptions().position(location).title("Singapore"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,10));
 
+        //test
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+
+        reqRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Retrieve beneficiary data and add marker to map
-                    String name = snapshot.child("name").getValue(String.class);
-                    Double latitude = snapshot.child("latitude").getValue(Double.class);
-                    Double longitude = snapshot.child("longitude").getValue(Double.class);
-                    LatLng location = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(location).title(name));
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    String key = childSnapshot.getKey(); // Get the key for this child
+
+                   double latitude = childSnapshot.child(key).child("initLoc").child("latitude").getValue(Double.class);
+                   double longitude = childSnapshot.child(key).child("initLoc").child("longitude").getValue(Double.class);
+                    Log.d("Latitude", String.valueOf(latitude));
+                    Log.d("Longitude", String.valueOf(longitude));
+                    // Get the HashMap for this key
+                    LatLng position=new LatLng(latitude,longitude);
+                    mMap.addMarker(new MarkerOptions().position(position).title("yay"));
+
+                    // Access the values in the HashMap as needed
+                    // For example, to retrieve a field named "initLoc" which is a LatLng object
+
                 }
             }
 
