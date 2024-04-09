@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,6 +26,7 @@ public class volunt_login extends AppCompatActivity {
     private EditText vLoginMail;
     private EditText vLoginPwd;
     private Button vLoginButton;
+    private TextView vsignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,15 @@ public class volunt_login extends AppCompatActivity {
         vLoginMail = findViewById(R.id.vLoginMail);
         vLoginPwd = findViewById(R.id.vLoginPwd);
         vLoginButton = findViewById(R.id.vLoginButton);
+        vsignup = findViewById(R.id.vsignup);
         mAuth = FirebaseAuth.getInstance();
+
+        vsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(volunt_login.this, volunt_signup.class));
+            }
+        });
 
         vLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, login_signup.class); //bene_create.class
             startActivity(intent);finish();
         }
-
     }, 2000);
 
 

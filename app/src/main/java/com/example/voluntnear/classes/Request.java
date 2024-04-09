@@ -8,11 +8,13 @@ public class Request {
     private String userId;
     private String requestType;
 
+    private String init_name;
+    private String desti_name;
+
     private String date;
     private String time;
     private LatLng initLoc;
     private LatLng destLoc;
-
     private String remarks;
 
 
@@ -22,19 +24,29 @@ public class Request {
     }
 
 
-    public Request(String reqID, String userId, String reqType, String date, String time, LatLng initLoc, LatLng destLoc, String remarks) {
+    public Request(String reqID, String userId, String reqType, String date, String time, String init_name, String desti_name, LatLng initLoc, LatLng destLoc, String remarks) {
         this.requestId = reqID;
         this.userId = userId;
         this.requestType = reqType;
         this.date=date;
         this.time=time;
         this.initLoc=initLoc;
+        this.init_name = init_name;
+        this.desti_name= desti_name;
         this.destLoc=destLoc;
         this.remarks = remarks;
     }
 
     public String getRequestId() {
         return requestId;
+    }
+
+    public String getInit_name() {
+        return init_name;
+    }
+
+    public String getDesti_name() {
+        return desti_name;
     }
 
     public void setRequestId(String requestId) {
@@ -65,6 +77,8 @@ public class Request {
     public void setInitLoc(LatLng initLoc){this.initLoc=initLoc;}
     public LatLng getDestLoc(){return destLoc;}
     public void setDestLoc(LatLng destLoc){this.destLoc=destLoc;}
+
+
 
     // Exclude the requestId from being stored in the database (since it's already the key)
     @Exclude
