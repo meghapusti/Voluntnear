@@ -84,15 +84,20 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    String key = childSnapshot.getKey(); // Get the key for this child
+
+                    // Get the key for object child as child path of childSnapshot
+                    DataSnapshot onlyChildSnapshot = childSnapshot.getChildren().iterator().next();
+                    String key=childSnapshot.getChildren().iterator().next().getKey();
 
                    double latitude = childSnapshot.child(key).child("initLoc").child("latitude").getValue(Double.class);
                    double longitude = childSnapshot.child(key).child("initLoc").child("longitude").getValue(Double.class);
+
                     Log.d("Latitude", String.valueOf(latitude));
                     Log.d("Longitude", String.valueOf(longitude));
+
                     // Get the HashMap for this key
                     LatLng position=new LatLng(latitude,longitude);
-                    mMap.addMarker(new MarkerOptions().position(position).title("yay"));
+                    mMap.addMarker(new MarkerOptions().position(position).title(""));
 
                     // Access the values in the HashMap as needed
                     // For example, to retrieve a field named "initLoc" which is a LatLng object
