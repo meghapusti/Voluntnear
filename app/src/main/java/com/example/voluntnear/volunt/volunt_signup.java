@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -38,6 +39,7 @@ public class volunt_signup extends AppCompatActivity {
     private EditText vhpField;
     private EditText vpwdField;
     private Button vSignUpButton;
+    private TextView vlogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,15 @@ public class volunt_signup extends AppCompatActivity {
         vhpField = findViewById(R.id.vhpField);
         vpwdField = findViewById(R.id.vpwdField);
         vSignUpButton = findViewById(R.id.vSignUpButton);
+        vlogin = findViewById(R.id.vlogin);
         mAuth = FirebaseAuth.getInstance();
+
+        vlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(volunt_signup.this, volunt_login.class));finish();
+            }
+        });
 
         vSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

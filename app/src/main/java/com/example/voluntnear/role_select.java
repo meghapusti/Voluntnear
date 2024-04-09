@@ -25,7 +25,7 @@ public class role_select extends AppCompatActivity {
     private Button continbutton;
     private ChipGroup chipGroup;
     private ImageButton backRoleButton;
-    private String selectedRole = ""; //only exist within this activity --> redirect to which page
+    public static String selectedRole = ""; //only exist within this activity --> redirect to which page
     private String role;
 
     @Override

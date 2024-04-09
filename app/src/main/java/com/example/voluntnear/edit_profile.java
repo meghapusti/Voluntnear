@@ -1,8 +1,10 @@
 package com.example.voluntnear;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.Button;
 import androidx.annotation.NonNull;
@@ -13,7 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.voluntnear.bene.bene_home;
 import com.example.voluntnear.classes.User;
+import com.example.voluntnear.volunt.volunt_home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +37,8 @@ public class edit_profile extends AppCompatActivity {
     private EditText oldPwd;
     private EditText newPwd;
     private EditText newHPNo;
+    private ImageButton backEditButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +49,21 @@ public class edit_profile extends AppCompatActivity {
         oldPwd = findViewById(R.id.oldPwd);
         newPwd = findViewById(R.id.newPwd);
         newHPNo = findViewById(R.id.newHPNo);
+        backEditButton = findViewById(R.id.backEditButton);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        backEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (role_select.selectedRole.equals("Beneficiary")){
+                    startActivity(new Intent(edit_profile.this, bene_home.class));finish();
+                }
+                else{
+                    startActivity(new Intent(edit_profile.this, volunt_home.class));finish();
+                }
+            }
+        });
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

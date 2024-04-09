@@ -218,10 +218,15 @@ public class bene_create extends AppCompatActivity {
                 Map<String, Object> reqData = new HashMap<>();
 
                 // Create a Request object with the request details
-                Request request = new Request(reqID, userId, reqType, date, time, initLoc, destLoc, remarks);
+                Request request = new Request(reqID, userId, reqType, date, time, initName, destName, initLoc, destLoc, remarks);
                 reqData.put(request.getRequestId(), request);
 
+                //Get Reference to DB item of user
                 DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+
+                //Get Reference to DB table Requests
+                DatabaseReference beneRef = FirebaseDatabase.getInstance().getReference("Users").child("Bene").child(userId);
+                beneRef.child("Pending").setValue(reqData);
 
                 // Set the req data under a unique key using the current reqID
                 reqRef.child(reqID).setValue(reqData).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -237,8 +242,6 @@ public class bene_create extends AppCompatActivity {
                         }
                     }
                 });
-
-
             }
         });
 

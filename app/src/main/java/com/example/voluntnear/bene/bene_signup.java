@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -32,6 +36,7 @@ public class bene_signup extends AppCompatActivity {
     private EditText bhpField;
     private EditText bpwdField;
     private Button bSignUpButton;
+    private TextView blogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,15 @@ public class bene_signup extends AppCompatActivity {
         bhpField = findViewById(R.id.bhpField);
         bpwdField = findViewById(R.id.bpwdField);
         bSignUpButton = findViewById(R.id.bSignUpButton);
+        blogin = findViewById(R.id.blogin);
         mAuth = FirebaseAuth.getInstance();
+
+        blogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(bene_signup.this, bene_login.class));
+            }
+        });
 
 
         bSignUpButton.setOnClickListener(new View.OnClickListener() {

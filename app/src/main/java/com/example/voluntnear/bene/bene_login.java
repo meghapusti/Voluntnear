@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +28,8 @@ public class bene_login extends AppCompatActivity {
     private EditText bLoginMail;
     private EditText bLoginPwd;
     private Button bLoginButton;
+
+    private TextView bsignup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,15 @@ public class bene_login extends AppCompatActivity {
         bLoginMail = findViewById(R.id.bLoginMail);
         bLoginPwd = findViewById(R.id.bLoginPwd);
         bLoginButton = findViewById(R.id.bLoginButton);
+        bsignup = findViewById(R.id.bsignup);
         mAuth = FirebaseAuth.getInstance();
+
+        bsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(bene_login.this, bene_signup.class));finish();
+            }
+        });
 
         bLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
