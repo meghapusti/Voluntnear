@@ -11,6 +11,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.voluntnear.bene.bene_create;
+import com.example.voluntnear.bene.bene_login;
+import com.example.voluntnear.bene.bene_reqsummary;
 import com.example.voluntnear.volunt.volunt_home;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     new Handler().postDelayed(new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(MainActivity.this, login_signup.class); //bene_create.class
+            Intent intent = new Intent(MainActivity.this, bene_login.class); //bene_create.class
             startActivity(intent);finish();
         }
     }, 2000);

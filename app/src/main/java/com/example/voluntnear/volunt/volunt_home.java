@@ -36,7 +36,6 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
 
     private ImageButton vtaskButton;
     private ImageButton veditprofileButton;
-    private DatabaseReference mDatabase;
     private GoogleMap mMap;
 
     @Override
@@ -46,7 +45,6 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_volunt_home);
 
         // Initialize Firebase Database reference
-        mDatabase = FirebaseDatabase.getInstance().getReference("beneficiaries");
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
         mapFragment.getMapAsync(this);
 
@@ -77,7 +75,6 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,10));
 
         //test
-
         DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
 
         reqRef.addListenerForSingleValueEvent(new ValueEventListener() {

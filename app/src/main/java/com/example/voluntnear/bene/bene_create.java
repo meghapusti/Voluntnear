@@ -204,6 +204,11 @@ public class bene_create extends AppCompatActivity {
                     breqTime.setError("Time is required");
                     return;
                 }
+                if (TextUtils.isEmpty(remarks)){
+                    breqRemark.setError("Remarks is required");
+                    return;
+                }
+
 
                 // Create a new unique key for the request
                 String reqID = mDatabase.getReference("Requests").push().getKey();
@@ -225,8 +230,8 @@ public class bene_create extends AppCompatActivity {
                 DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
 
                 //Get Reference to DB table Requests
-                DatabaseReference beneRef = FirebaseDatabase.getInstance().getReference("Users").child("Bene").child(userId);
-                beneRef.child("Pending").setValue(reqData);
+                DatabaseReference beneRef = FirebaseDatabase.getInstance().getReference("Users").child("Bene").child(userId).child("Pending");
+                beneRef.child(reqID).setValue(reqData);
 
                 // Set the req data under a unique key using the current reqID
                 reqRef.child(reqID).setValue(reqData).addOnCompleteListener(new OnCompleteListener<Void>() {
