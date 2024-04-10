@@ -9,8 +9,11 @@ import android.widget.ImageButton;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.voluntnear.R;
+import com.example.voluntnear.volunt.voluntAdaptor;
 import com.example.voluntnear.classes.Request;
 import com.example.voluntnear.edit_profile;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,12 +41,47 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
     private ImageButton vtaskButton;
     private ImageButton veditprofileButton;
     private GoogleMap mMap;
+    ArrayList<total_req> totalreqlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_volunt_home);
+
+        RecyclerView voluntRecycleV = findViewById(R.id.voluntRecycleV);
+
+        //setting up recycle view
+        voluntRecycleV.setHasFixedSize(true);
+        voluntRecycleV.setLayoutManager(new LinearLayoutManager(this));
+        totalreqlist = new ArrayList<>();
+        voluntAdaptor myAdaptor = new voluntAdaptor(this, totalreqlist);
+        voluntRecycleV.setAdapter(myAdaptor);
+
+        //Initializing Firebase Reference for Tasks
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        DatabaseReference voluntnode = FirebaseDatabase.getInstance().getReference("Requests");
+
+        voluntnode.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot childSnapshot : snapshot.getChildren()){
+                    String childKey = childSnapshot.getKey();
+                    String reqID = String.valueOf(childSnapshot.getKey());
+                    String reqType = String.valueOf(childSnapshot.child(childKey).child("requestType").getValue());
+                    String addr = String.valueOf(childSnapshot.child(childKey).child("init_name").getValue());
+                    String date = String.valueOf(childSnapshot.child(childKey).child("date").getValue());
+                    total_req req1 = new total_req(reqID,addr,date,reqType);
+                    totalreqlist.add(req1);
+                }
+                myAdaptor.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         // Initialize Firebase Database reference
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
