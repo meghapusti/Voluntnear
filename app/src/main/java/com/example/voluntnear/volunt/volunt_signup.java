@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.voluntnear.R;
 import com.example.voluntnear.bene.bene_login;
 import com.example.voluntnear.bene.bene_signup;
-import com.example.voluntnear.classes.User;
+import com.example.voluntnear.classes.User;//importing user class
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
