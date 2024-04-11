@@ -41,7 +41,7 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
     private ImageButton vtaskButton;
     private ImageButton veditprofileButton;
     private GoogleMap mMap;
-    ArrayList<total_req> totalreqlist;
+    ArrayList<total_req> totalreqlist;//use of ArrayList 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +60,20 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
 
         //Initializing Firebase Reference for Tasks
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        DatabaseReference voluntnode = FirebaseDatabase.getInstance().getReference("Requests");
-
+        DatabaseReference voluntnode = FirebaseDatabase.getInstance().getReference("Requests");//use of singleton pattern
+        //retrieving data from the firebase and populating the list 
         voluntnode.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childSnapshot : snapshot.getChildren()){
+                    //using DataSnapshot to iterate
                     String childKey = childSnapshot.getKey();
                     String reqID = String.valueOf(childSnapshot.getKey());
                     String reqType = String.valueOf(childSnapshot.child(childKey).child("requestType").getValue());
                     String addr = String.valueOf(childSnapshot.child(childKey).child("init_name").getValue());
                     String date = String.valueOf(childSnapshot.child(childKey).child("date").getValue());
-                    total_req req1 = new total_req(reqID,addr,date,reqType);
-                    totalreqlist.add(req1);
+                    total_req req1 = new total_req(reqID,addr,date,reqType);//Object Instantiation 
+                    totalreqlist.add(req1); //Adding request to the list
                 }
                 myAdaptor.notifyDataSetChanged();
             }
@@ -85,7 +86,7 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
 
         // Initialize Firebase Database reference
         SupportMapFragment mapFragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.id_map);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);//inteface segregation principle
 
 
         vtaskButton = findViewById(R.id.vtaskButton);
@@ -113,7 +114,7 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(location).title("Singapore"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location,10));
 
-        //test
+        //retrieving data from the firebase and adding markers to the map 
         DatabaseReference reqRef = FirebaseDatabase.getInstance().getReference().child("Requests");
 
         reqRef.addListenerForSingleValueEvent(new ValueEventListener() {
