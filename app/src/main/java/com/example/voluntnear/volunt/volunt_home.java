@@ -1,6 +1,5 @@
 package com.example.voluntnear.volunt;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import com.example.voluntnear.R;
 import com.example.voluntnear.volunt.voluntAdaptor;
 import com.example.voluntnear.classes.Request;
 import com.example.voluntnear.edit_profile;
-import com.example.voluntnear.volunt_taskdetails;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,7 +42,6 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
     private ImageButton veditprofileButton;
     private GoogleMap mMap;
     ArrayList<total_req> totalreqlist;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +50,6 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_volunt_home);
 
         RecyclerView voluntRecycleV = findViewById(R.id.voluntRecycleV);
-        voluntRecycleV.addOnItemTouchListener(
-                new RecyclerItemClickListener(context, voluntRecycleV, new RecyclerItemClickListener.OnItemClickListener(){
-                    @Override public void onItemClick(View view, int position){
-                        total_req clickedItem = totalreqlist.get(position);
-
-                        Intent intent = new Intent(volunt_home.this, volunt_taskdetails.class);
-                        intent.putExtra("reqID", clickedItem.getRequestId());
-                        intent.putExtra("reqType", clickedItem.getReqtype());
-                        intent.putExtra("addr", clickedItem.getAddr());
-                        intent.putExtra("date", clickedItem.getDate());
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-                })
-        );
 
         //setting up recycle view
         voluntRecycleV.setHasFixedSize(true);

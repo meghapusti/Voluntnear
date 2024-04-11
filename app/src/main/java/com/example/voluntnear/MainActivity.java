@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     new Handler().postDelayed(new Runnable() {
         @Override
         public void run() {
-            Intent intent = new Intent(MainActivity.this, volunt_login.class); //bene_create.class
+            Intent intent = new Intent(MainActivity.this, login_signup.class); //bene_create.class
             startActivity(intent);finish();
         }
     }, 2000);
