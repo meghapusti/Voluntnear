@@ -95,7 +95,7 @@ public class bene_signup extends AppCompatActivity {
                             Map<String, Object> userData = new HashMap<>();
 
                             //Create User Obj
-                            User user1 = new User(email,name,password, phoneno, "bene");
+                            User user1 = new User(email,name, phoneno, "bene");
                             userData.put(user1.getName(), user1);
 
 

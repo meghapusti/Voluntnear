@@ -98,7 +98,7 @@ public class volunt_signup extends AppCompatActivity {
                             Map<String, Object> userData = new HashMap<>();
 
                             //Create User Obj
-                            User user1 = new User(email,name,password, phoneno, "volunt");
+                            User user1 = new User(email,name, phoneno, "volunt");
                             userData.put(user1.getName(), user1);
 
 

@@ -18,12 +18,23 @@
         android:layout_height="wrap_content">
 
         <!-- Text View to display Course Name -->
+        <ImageView
+            android:id="@+id/pendImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
+            android:padding="5dp"
+            android:src="@drawable/accepttask" />
+
+        <!-- Text View to display Course Name -->
         <TextView
             android:id="@+id/voluntType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/pendImage"
             android:textColor="@color/black" />
 
         <TextView
@@ -33,6 +44,7 @@
             android:layout_below="@id/voluntType"
             android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
+            android:layout_toEndOf="@id/pendImage"
             android:drawablePadding="2dp" />
 
         <TextView
@@ -42,6 +54,7 @@
             android:layout_below="@id/voluntLoc"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/pendImage"
             android:drawablePadding="2dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
