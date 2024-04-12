@@ -70,7 +70,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="488dp"
         android:layout_marginEnd="208dp"
-        android:text="time here "
+        android:text="date here "
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

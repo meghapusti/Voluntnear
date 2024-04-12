@@ -64,6 +64,10 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
                         intent.putExtra("reqType", clickedItem.getReqtype());
                         intent.putExtra("addr", clickedItem.getAddr());
                         intent.putExtra("date", clickedItem.getDate());
+                        intent.putExtra("userID", clickedItem.getUserId());
+                        intent.putExtra("time", clickedItem.getTime());
+                        intent.putExtra("remarks", clickedItem.getRemarks());
+                        intent.putExtra("dest", clickedItem.getDesti_name());
                         startActivity(intent);
                     }
 
@@ -93,7 +97,11 @@ public class volunt_home extends AppCompatActivity implements OnMapReadyCallback
                     String reqType = String.valueOf(childSnapshot.child(childKey).child("requestType").getValue());
                     String addr = String.valueOf(childSnapshot.child(childKey).child("init_name").getValue());
                     String date = String.valueOf(childSnapshot.child(childKey).child("date").getValue());
-                    total_req req1 = new total_req(reqID,addr,date,reqType);
+                    String userId = String.valueOf(childSnapshot.child(childKey).child("userId").getValue());
+                    String time = String.valueOf(childSnapshot.child(childKey).child("time").getValue());
+                    String desti_name = String.valueOf(childSnapshot.child(childKey).child("desti_name").getValue());
+                    String remarks = String.valueOf(childSnapshot.child(childKey).child("remarks").getValue());
+                    total_req req1 = new total_req(reqID,addr,date,reqType,userId,time,desti_name,remarks);
                     totalreqlist.add(req1);
                 }
                 myAdaptor.notifyDataSetChanged();

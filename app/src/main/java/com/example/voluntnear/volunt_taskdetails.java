@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.voluntnear.classes.Request;
+import com.example.voluntnear.classes.User;
 import com.example.voluntnear.volunt.total_req;
 import com.example.voluntnear.volunt.volunt_home;
 import com.google.android.gms.maps.model.LatLng;
@@ -24,18 +25,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class volunt_taskdetails extends AppCompatActivity {
     private Button acceptTaskButton;
     private ImageButton backvtasksButton;
     public String reqID;
     public String reqType;
-    public String addr;
     public String date;
-
-
+    public String time;
+    public String addr;
     public String destloc;
     public String remark;
+    public String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,14 @@ public class volunt_taskdetails extends AppCompatActivity {
         setContentView(R.layout.activity_volunt_taskdetails);
 
         TextView reqtypeText = findViewById(R.id.ReqType);
-        TextView datetimeText = findViewById(id.reqdate);
+        TextView reqnameText = findViewById(R.id.reqername);
+        TextView telenumText = findViewById(R.id.reqtelenum);
+        TextView dateText = findViewById(R.id.reqdate);
+        TextView timeText = findViewById(R.id.reqtime);
         TextView initlocText = findViewById(R.id.initloc);
+        TextView destilocText = findViewById(id.destiLoc);
+        TextView remarksText = findViewById(id.remarks);
+
 
         acceptTaskButton = findViewById(R.id.acceptTaskButton);
         backvtasksButton = findViewById(R.id.backvtasksButton);
@@ -56,39 +64,44 @@ public class volunt_taskdetails extends AppCompatActivity {
             reqType = intent.getStringExtra("reqType");
             addr = intent.getStringExtra("addr");
             date = intent.getStringExtra("date");
+            time = intent.getStringExtra("time");
+            destloc = intent.getStringExtra("dest");
+            remark = intent.getStringExtra("remarks");
+            userId = intent.getStringExtra("userID");
         }
 
         reqtypeText.setText(reqType);
-        datetimeText.setText(date);
+
+        dateText.setText(date);
+        timeText.setText(time);
         initlocText.setText(addr);
+        destilocText.setText(destloc);
+        remarksText.setText(remark);
 
 
-
-        DatabaseReference mdata = FirebaseDatabase.getInstance().getReference("Requests").child("reqID");
+        DatabaseReference mdata = FirebaseDatabase.getInstance().getReference("Users").child("Bene").child(userId);
         mdata.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childSnapshot : snapshot.getChildren()) {
-                    String childKey = childSnapshot.getKey();
-                    String reqID = String.valueOf(childSnapshot.getKey());
-                    String reqType = String.valueOf(childSnapshot.child(childKey).child("requestType").getValue());
-                    String init_name = String.valueOf(childSnapshot.child(childKey).child("init_name").getValue());
-                    String date = String.valueOf(childSnapshot.child(childKey).child("date").getValue());
-                    String name = String.valueOf(childSnapshot.child(childKey).child("name").getValue());
-                    String userId = String.valueOf(childSnapshot.child(childKey).child("userID").getValue());
-                    String time = String.valueOf(childSnapshot.child(childKey).child("time").getValue());
-                    String desti_name = String.valueOf(childSnapshot.child(childKey).child("name").getValue());
-                    String remarks = String.valueOf(childSnapshot.child(childKey).child("remarks").getValue());
+                    if (!childSnapshot.getKey().equals("Pending")) {
+                        String childKey = childSnapshot.getKey();
+                        String username = String.valueOf(childSnapshot.child("name").getValue());
+                        String password = String.valueOf(childSnapshot.child("password").getValue());
+                        String telenum = String.valueOf(childSnapshot.child("phno").getValue());
+                        String role = String.valueOf(childSnapshot.child("role").getValue());
+
+                        reqnameText.setText(username);
+                        telenumText.setText(telenum);
+                        break;
+                    }
                 }
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
+
 
 
         backvtasksButton.setOnClickListener(new View.OnClickListener() {
