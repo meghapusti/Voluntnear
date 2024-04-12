@@ -44,7 +44,7 @@ public class volunt_taskdetails extends AppCompatActivity {
         setContentView(R.layout.activity_volunt_taskdetails);
 
         TextView reqtypeText = findViewById(R.id.ReqType);
-        TextView datetimeText = findViewById(R.id.datime);
+        TextView datetimeText = findViewById(id.reqdate);
         TextView initlocText = findViewById(R.id.initloc);
 
         acceptTaskButton = findViewById(R.id.acceptTaskButton);

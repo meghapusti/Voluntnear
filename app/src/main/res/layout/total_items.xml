@@ -33,7 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
             android:layout_toEndOf="@id/pendImage"
             android:textColor="@color/black" />
 
@@ -43,7 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/voluntType"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
             android:layout_toEndOf="@id/pendImage"
             android:drawablePadding="2dp" />
 
@@ -53,7 +57,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/voluntLoc"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
             android:layout_toEndOf="@id/pendImage"
             android:drawablePadding="2dp" />
     </RelativeLayout>

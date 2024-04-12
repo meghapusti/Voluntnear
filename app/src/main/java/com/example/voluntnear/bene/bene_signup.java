@@ -96,7 +96,7 @@ public class bene_signup extends AppCompatActivity {
 
                             //Create User Obj
                             User user1 = new User(email,name, phoneno, "bene");
-                            userData.put(user1.getName(), user1);
+                            userData.put(userId, user1);
 
 
                             DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Bene");
