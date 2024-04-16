@@ -20,4 +20,14 @@
       app:layout_constraintTop_toTopOf="parent"
       app:srcCompat="@drawable/back" />
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/accRecycleV"
+      android:layout_width="343dp"
+      android:layout_height="170dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.543" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

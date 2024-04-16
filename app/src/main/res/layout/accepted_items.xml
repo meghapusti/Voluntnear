@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- ImageVIew to display our Course Image -->
+        <ImageView
+            android:id="@+id/pendImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:padding="5dp"
+            android:src="@drawable/doing" />
+
+        <!-- Text View to display Course Name -->
+        <TextView
+            android:id="@+id/reqType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:layout_toEndOf="@id/pendImage" />
+
+        <TextView
+            android:id="@+id/reqLoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reqType"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:layout_toEndOf="@id/pendImage" />
+
+        <TextView
+            android:id="@+id/reqDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/reqLoc"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:layout_toEndOf="@id/pendImage"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
