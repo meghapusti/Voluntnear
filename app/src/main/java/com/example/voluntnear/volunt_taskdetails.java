@@ -144,17 +144,10 @@ public class volunt_taskdetails extends AppCompatActivity {
                 benepenRef.child(reqID).removeValue();
 
                 //remove from requests
-                DatabaseReference accRef = FirebaseDatabase.getInstance().getReference().child("Requests");
+                DatabaseReference accRef = FirebaseDatabase.getInstance().getReference().child("Requests").child(reqID);
                 accRef.child(reqID).removeValue();
 
-
-                /*Intent intent1 = new Intent(volunt_taskdetails.this, volunt_tasks.class);
-                intent1.putExtra("addr", addr);
-                intent1.putExtra("type",reqType);
-                intent1.putExtra("date",date);
-                startActivity(intent1);
-                 */
-
+                startActivity(new Intent(volunt_taskdetails.this, volunt_tasks.class));
 
             }
         });
